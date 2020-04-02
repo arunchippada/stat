@@ -3,21 +3,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.stats as stats
-import explore.cdf_func as cdf_func
+import cdf_func as cdf_func
 
 
-def std_err_exp(n):
+GAME_TIME = 90
+
+
+def simulate_game(lam):
+    goals = []
+    cur_game_time = 0
+    expon = stats.expon(loc=0, scale=1/lam)
+
+    while cur_game_time < GAME_TIME:
+        goal_interval = expon.rvs(size=1)[0]
+        cur_game_time += goal_interval
+        if cur_game_time <= GAME_TIME:
+            goals.append(goal_interval)
+
+    return len(goals)
+
+
+def error_dist(lam):
     errors = []
     for _ in range(1000):
-        # Lambda = 2 implies scale = 1/2
-        # expon = stats.expon(loc=0, scale=1/2)
-        # sample = pd.Series(expon.rvs(size=n))
-
-        expon = np.random.exponential(1/2, n)
-        sample = pd.Series(expon)
-
-        mean = sample.mean()
-        lambdabar = 1/mean
+        g = simulate_game(lam)
+        lambdabar = g/GAME_TIME
         errors.append(lambdabar - 2)
 
     error_dist = pd.Series(errors)
@@ -36,14 +46,4 @@ def std_err_exp(n):
     return error_dist.std()
 
 
-std_err_exp(10)
-if 0:
-    std_errors = []
-    sample_sizes = range(10, 100, 10)
-    for i in sample_sizes:
-        std_errors.append(std_err_exp(i))
-
-    plt.figure(2)
-    sns.lineplot(x=sample_sizes, y=std_errors, lw=1, color="blue", label="std error for increasing sample size")
-    plt.show()
-
+print(error_dist(1/10))

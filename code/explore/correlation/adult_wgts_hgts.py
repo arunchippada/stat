@@ -2,9 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import scipy.stats as stats
 import brfss
-import explore.cdf_func as cdf_func
 
 
 def jitter(s, r):
