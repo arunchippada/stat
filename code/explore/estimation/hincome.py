@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import hinc
 import hinc2
-import explore.cdf_func as cdf_func
+import cdf_func as cdf_func
 
 def pearsonMedianSkewness(mean, median, std):
     return 3 * (mean - median) / std

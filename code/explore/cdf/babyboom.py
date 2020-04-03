@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import analytic
-import explore.cdf_func as cdf_func
+import cdf_func as cdf_func
 import scipy.stats as stats
 
 

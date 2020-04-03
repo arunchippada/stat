@@ -14,7 +14,7 @@ def cohen_effect_size(s1, s2):
     return mean_diff/np.sqrt(weighted_variance)
 
 
-df = nsfg.ReadFemPreg()
+df = nsfg.ReadFemPreg(dct_file="../2002FemPreg.dct", dat_file="../2002FemPreg.dat.gz")
 
 df_live = df[df.outcome == 1]
 

@@ -19,7 +19,7 @@ def spearman(s1, s2):
     return pearson(s1.rank(), s2.rank())
 
 
-df = nsfg.ReadFemPreg()
+df = nsfg.ReadFemPreg(dct_file="../2002FemPreg.dct", dat_file="../2002FemPreg.dat.gz")
 
 df_live = df[(df.outcome == 1) & np.isfinite(df.agepreg) & np.isfinite(df.totalwgt_lb)]
 
