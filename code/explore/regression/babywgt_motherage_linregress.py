@@ -31,3 +31,9 @@ print()
 print("Pearson =", pearson(df_live.agepreg, df_live.totalwgt_lb), sep=' ')
 print()
 
+sns.set(color_codes=True)
+
+plt.figure(1)
+sns.lmplot(x="agepreg", y="totalwgt_lb", data=df_live)
+plt.show()
+
